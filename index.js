@@ -1,23 +1,9 @@
-
 var telegram_bot = require('node-telegram-bot-api')
 var request = require('request')
-
-
 var token = '6086914137:AAHtQYX20-myxUaO-r39luITQ2xd2_PPGkM'
-
 var bot = new telegram_bot(token, { polling: true });
-
-
-
 bot.on("polling_error", (err) => console.log(err));
-
-
-
-
 bot.onText(/\/city (.+)/, function (msg, match) {
-
-	
-	
 	var city = match[1];
 	var chatId = msg.chat.id
 	var query =
@@ -36,37 +22,10 @@ bot.onText(/\/city (.+)/, function (msg, match) {
 				res = JSON.parse(body)
 				var temp = Math.round((parseInt(
 					res.main.temp_min) - 273.15), 2)
-
-				
-				
-				var pressure = Math.round(parseInt(
-						res.main.pressure) - 1013.15)
-
-				var rise = new Date(parseInt(
-						res.sys.sunrise) * 1000);
-
-				var set = new Date(parseInt(
-						res.sys.sunset) * 1000);
-				
-
 				bot.sendMessage(chatId, '**** '
 					+ res.name + ' ****\nTemperature: '
-					+ String(temp) + '°C\nHumidity: ' +
-					res.main.humidity + ' %\nWeather: '
-					+ res.weather[0].description +
-					'\nPressure: ' + String(pressure)
-					+ ' atm\nSunrise: ' +
-					rise.toLocaleTimeString() +
-					' \nSunset: ' +
-					set.toLocaleTimeString() +
-					'\nCountry: ' + res.sys.country)
+					+ String(temp))
 			})
-
-			
-			
-			
-			
-			
 		}
 	})
 })
