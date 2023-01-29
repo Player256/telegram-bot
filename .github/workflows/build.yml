@@ -6,24 +6,13 @@ on:
     - cron: '0 */3 * * *' 
 
 jobs:
-  run_weather_bot:
-    name: Run Weather Bot
-    runs-on: windows-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2.3.3
-
-      - name: Setup Node Environment
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.19.0
-
-      - name: Clean Install NPM Dependencies
-        run: npm ci
-
-      - name: Run the Bot
-        run: npm start
-        env:
-          WEATHER_API_TOKEN: ${{ secrets.WEATHER_API_TOKEN}}
-          TELEGRAM_BOT_KEY: ${{ secrets.TELEGRAM_TOKEN}}
-          
+  build-node:
+    runs-on : ubuntu-latest
+    container : node:16
+    steps :
+      - run : node --version
+      - run : npm --version
+      - uses : actions/checkout@v3
+      - run : npm install
+      - run : node app.js
+  
