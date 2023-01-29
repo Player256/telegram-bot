@@ -24,7 +24,7 @@ bot.onText(/\/city (.+)/, function (msg, match) {
 					res.main.temp_min) - 273.15), 2)
 				bot.sendMessage(chatId, '**** '
 					+ res.name + ' ****\nTemperature: '
-					+ String(temp))
+					+ String(temp)+"degrees")
 			})
 		}
 	})
