@@ -3,7 +3,7 @@ var telegram_bot = require('node-telegram-bot-api')
 var request = require('request')
 
 
-var token = "6086914137:AAHtQYX20-myxUaO-r39luITQ2xd2_PPGkM"
+var token = process.env.TELEGRAM_BOT_KEY
 
 var bot = new telegram_bot(token, { polling: true });
 
@@ -22,7 +22,7 @@ bot.onText(/\/city (.+)/, function (msg, match) {
 	var chatId = msg.chat.id
 	var query =
     'http://api.openweathermap.org/data/2.5/weather?q='
-		+ city + '&appid=6ce67c04b5565d320c6225d0ff681963'
+		+ city + `&appid=${process.env.WEATHER_API_TOKEN}`
 
 	
 	request(query, function (error, response, body) {
