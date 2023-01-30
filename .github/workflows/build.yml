@@ -2,8 +2,7 @@ name : telegram-bot
 on:
   push:
     branches: [master]
-  schedule:
-    - cron: '0 */1 * * *' 
+  
 
 jobs:
   build-node:
